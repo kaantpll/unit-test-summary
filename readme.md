@@ -29,3 +29,66 @@ neler yapılmalı ;
  - Kodda bir refaktör işlemi yapıldıysa test kodlarında da refaktör yapılmalıdır.
 
 ### Test Kalitesini Ölçerken Test Coverage Araçlarını Kullanma
+Test Coverage kodumuzun ne kadarının test edildiğini bize gösterir. Yüksek test covarage daha iyi 
+gibi genel bir algı vardır ama bu doğru değildir. İyi analiz edilmemiş, güvenli olmayan ve kalitesiz
+testlerde code covarege artırır ama bu testin kaliteli olduğunu göstermez. 
+Code covarege hesaplanırken testi yazılmış kod satırı ile toplam kod satırının birbirine olan oranı ile hesaplanır. Bu hesap kod yazımına göre değişebilir ama mantık olarak aynı kapıya yol açsada code covarage oranı değişebilir.
+
+```
+function isEligible (int number)
+{
+
+ if(number > 3)
+   return true;
+
+ return false
+}
+
+
+it('is eligible test')
+{
+  bool result = isEligible(5);
+  assert.equal(false,result)
+}
+
+```
+
+Üstteki koddun code covarege oranı hesaplanırken  test edilmiş kod satırı / toplam kod satırı. Bu işlem sonucu 4/5 = %80 code covarage diyebiliriz. (Hesaplanırken süslü parantezlerde dikkate alınmıştır.)  Şimdi kodumuzda bir düzeltme yaptıktan sonraki haline bakalım.
+
+```
+function isEligible (int number)
+{
+   return  number > 2;
+}
+
+
+it('is eligible test'){
+  bool result = isEligible(5);
+  assert.equal(false,result)
+}
+
+```
+Kodun refaktör edilmiş hali ile kod %100 code covarage ulaştı ama aslında kodun çalışma mantığında hiçbir değişim olmadı.
+
+Bu örnek ile code covarage oranının yüksek olması ile test kalitesinin ve güvenilirliğinin kesinlikle doğru olmadığını bize göstermiştir.
+
+### Branch Covarage Metric Nedir ? 
+Bir başka test covarage oranı hesaplama yöntemi denilebilir. Bu yöntem herkesin bildiğin code covarage hesaplama yönteminden daha doğru sonuçlar verir. Kod satırı toplamları ile değil kontrol yapısına odaklanarak hesap yapılır. Örneğin if veya switch'ler gibi. Branch covarage test = Gezilen branchler / toplam branchler. Örneğin
+
+```
+function isEligible (int number)
+{
+   return  number > 2;
+}
+
+
+it('is eligible test'){
+  bool result = isEligible(5);
+  assert.equal(false,result)
+}
+
+```
+
+Örnek kodda iki tane durum (control) var diyebiliriz. İlki number'ın ikiden büyük olma durumu, ikincisi number'ın ikiden küçük veya eşit olma durumu. Yazmış olduğumuz test ise şuan sadece
+bir tane durumu karşılıyor bu da branch code metric ile hesapladığımızda 1/2 = %50 code covarege sağlanmış olduğunu bize gösteriyor.
+
