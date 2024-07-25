@@ -92,3 +92,17 @@ it('is eligible test'){
 Örnek kodda iki tane durum (control) var diyebiliriz. İlki number'ın ikiden büyük olma durumu, ikincisi number'ın ikiden küçük veya eşit olma durumu. Yazmış olduğumuz test ise şuan sadece
 bir tane durumu karşılıyor bu da branch code metric ile hesapladığımızda 1/2 = %50 code covarege sağlanmış olduğunu bize gösteriyor.
 
+
+## Code Metric'lerindeki Problemler
+- Kod metrikleri sistemin tamamen test altında olduğunu garanti etmez.
+- Kod metrikleri kullandığınız kütüphaneleri teste dahil  etmez.
+
+## Başarılı Test Nasıl Yazılır ?
+Aslında bu çok zor bir uğraş. Her olası durumu ele alıp tek tek tüm durumlar için test yazılmalıdır. Tabiki bu zaman ve maliyet olarak dezavantajlı olsada doğrusu budur.
+
+## Unit Testin Tanımı Nedir ? 
+
+
+
+
+
