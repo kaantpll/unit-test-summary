@@ -100,7 +100,65 @@ bir tane durumu karşılıyor bu da branch code metric ile hesapladığımızda 
 ## Başarılı Test Nasıl Yazılır ?
 Aslında bu çok zor bir uğraş. Her olası durumu ele alıp tek tek tüm durumlar için test yazılmalıdır. Tabiki bu zaman ve maliyet olarak dezavantajlı olsada doğrusu budur.
 
-## Unit Testin Tanımı Nedir ? 
+## Unit Testin Anatomisi
+### AAA Paterni
+AAA paterni unit test yazarken bir standart haline gelmiş bir patterndir. Arrange, Act ve Assert anlamına gelir. Arrange aşaması testi gerçekletirmek için olan verilerin ayarlanması,
+act aşaması fonksiyonun çağrıldığı ve son alan olan assert ise fonksiyondan aldığımız
+sonucu doğrulama aşamasıdır. Örnek:
+
+```
+function sumOfTwoNumbers (int number)
+{
+   //Arange
+   const number1 = 5;
+   const number2 = 10;
+
+   // Act
+   const result = sum(number1,number2)
+
+  // Assert
+  expect(result).toBe(15);
+   
+}
+
+```
+
+Bu yaklaşım unit test yazmaya bir standart getirir ve kodun okunmasını kolaylaştırır.
+
+### Given-When-Then Paterni
+Bu paternde aslında aynı amaçla ortaya çıkmıştır unit test yazmayı bir standart haline
+getirmek.
+AAA Paternine karşılık gelen alanlar:
+ - Given = Arrange,
+ - When = Act
+ - Then = Assert
+
+```
+function sumOfTwoNumbers (int number)
+{
+   //Given
+   const number1 = 5;
+   const number2 = 10;
+
+   // When
+   const result = sum(number1,number2)
+
+  // Then
+  expect(result).toBe(15);
+   
+}
+
+```
+
+## Birden Çok Arrange, Act ve Assert bölümlerini önlemek.
+Öncelikle bir unit test kodunda bu alanlardan hehrhangi birinin birden çok bulunması
+kodda bir sıkıntı olduğunu gösteririr ve refactor edilmesi gerektiğini bizlere gösterir.
+
+## Unit Testlerde if durumundan kaçınmak.
+Aynı şekilde unit testin içinde if durumu bulunması bir anti-pattern'dir ve kaçınılması gerekir. Unit testlerimizi basit tutmalıyız.
+
+## 3.3
+
 
 
 
