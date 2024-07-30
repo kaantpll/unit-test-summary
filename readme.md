@@ -157,8 +157,18 @@ kodda bir sıkıntı olduğunu gösteririr ve refactor edilmesi gerektiğini biz
 ## Unit Testlerde if durumundan kaçınmak.
 Aynı şekilde unit testin içinde if durumu bulunması bir anti-pattern'dir ve kaçınılması gerekir. Unit testlerimizi basit tutmalıyız.
 
-## 3.3
+## Kodları Yeniden Kullanma
+Unit test yazarken girdi verilerine ihtiyacımız oluyor(arrange kısmı). Bu değerleri bir kere oluşturup daha sonra diğer testler içinde kullanabiliriz.
 
+## Unit Test Isimlendirme
+Unit Test fonksiyonunu isimlendirirken kodun nasıl davrandığını açıkca anlatmak gerekir. Birden çok isimlendirme standartı bulunmaktadır. Bunlardan birisi: 
+[MethodUnderTest]_[Scenario]_[ExpectedResult]
+- MethodUnderTest kısmı test edilen metodun ismi
+- Scenario metodun yaptığı iş
+- ExpectedResult kısmı ise işlem sonucu beklenen çıktı
+
+Bu isimlendirme standardı bazı zamanlarda işe yaramayabiliyor çünkü bazen detaylar yerine davranışı test etmemiz gerekiyor. 
+sayfa 55 başında.
 
 
 
