@@ -168,9 +168,33 @@ Unit Test fonksiyonunu isimlendirirken kodun nasıl davrandığını açıkca an
 - ExpectedResult kısmı ise işlem sonucu beklenen çıktı
 
 Bu isimlendirme standardı bazı zamanlarda işe yaramayabiliyor çünkü bazen detaylar yerine davranışı test etmemiz gerekiyor. 
-sayfa 55 başında.
+
+```
+function void sum_of_two_numbers(){}
+```
+
+Bu test ismi gördüğünüz gibi standart'a uymuyor ama mantıklı ve açıklayıcı bir isimlendirme.
+
+Unit Test Fonksiyonlarını isimlendirirken yapmamız gerekenler;
+- Katı kuralları takip etmemize gerek yok. Bazı zamanlarda davranışı açıklamamız gerekebilir.
+- Eğer uzun bir isim yazacaksak alt tire ile ayırmamız okunabilirliği artırır. 
 
 
+## İyi Bir Testin 4 Kuralı
+- Gerilemelere karşı koruma
+- Yeniden Düzenlemeye Karşı Direnç
+- Hızlı Geri Dönüş
+- Bakım Kolaylığı
+
+Bu 4 kural sadece unit test için değil diğer test çeşitleri olan integration,end-to-end vb. testleri içinde geçerlidir. Şimdi bu 4 kuralı açıklayalım.
+
+### İlk Kural: Gerilmelere Karşı Koyma (Protection against regressions)
+Burdaki gerilmelereden kastımız kod içindeki bug'larımızdır. Bu kural aslında kodun devamlılığının sağlanmasıdır. Bir kod değiştiğinde diğer kod parçalarının çalışabilirliği bozulmaması gerekir. İyi yazılmış bir test bunu sağlar. Kod base büyüdükçede bug sayımız artar o yüzden bugların tespiti ve önlenmesi için ilk kuralın önemi büyüktür.
+
+### İkinci Kural: Kod refaktörüne Karşı Direnç
+Kodumuzu ve testlerimizi yazdığımızı düşünelim ve her şey çalışıyor. Sonra kodu daha iyi yazabileceğimizi düşündük ve bu da değişiklik ile kodun daha okunabilir ve ileriye dönük genişletilebileceğini düşündük ve kodun çalışma mantığını değiştirmeden, aynı çıktıları alacak şekilde yeniden yazdık. Her şey güzel ama unit testler hata vermeye başladı. Çünkü gözden kaçırdığımız yerler vardı. İşte iyi bir test bize bunun bilgisini verebilmelidir. Her bir kod değişikliğinde testler yeniden çalıştırılmalıdır ve hata riski en aza indirilmelidir.
+
+### Üçüncü Kural: 
 
 
 
