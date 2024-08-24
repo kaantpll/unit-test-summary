@@ -212,4 +212,36 @@ Burdaki gerilmelereden kastımız kod içindeki bug'larımızdır. Bu kural asl�
 
 Kodumuzu ve testlerimizi yazdığımızı düşünelim ve her şey çalışıyor. Sonra kodu daha iyi yazabileceğimizi düşündük ve bu da değişiklik ile kodun daha okunabilir ve ileriye dönük genişletilebileceğini düşündük ve kodun çalışma mantığını değiştirmeden, aynı çıktıları alacak şekilde yeniden yazdık. Her şey güzel ama unit testler hata vermeye başladı. Çünkü gözden kaçırdığımız yerler vardı. İşte iyi bir test bize bunun bilgisini verebilmelidir. Her bir kod değişikliğinde testler yeniden çalıştırılmalıdır ve hata riski en aza indirilmelidir.
 
-### Üçüncü Kural:
+### Üçüncü Kural: Hızlı Geridönüş Ve Sürdürülebilirlik
+
+Unit Testlerimiz değişimlerde bize geri dönüş yapar ve iyi unit testler de bu değişimlerdeki hataları fixlememize olanak sağlar. Bu sayede kodumuz daha sürdürülebilir olur.
+
+### Dördüncü Kural: Bakım Kolaylığı
+
+İyi unit testler kodu daha anlaşılabilir kılar. Yazdığınız kodun çalışma mantığını başka birisi unit testler üzerinden anlamalıdır. Bu sağlanır ise kodun bakımı daha kolay yapılır.
+
+#### Ideal test yazmak mümkün müdür ?
+
+Bu başlıktaki ideal testten kasıt üste yazdığımız 4 tane kuralında sağlanmasıdır. Peki bu mümkün mü ? Maalesef bu durum mümkün değildir. Çünkü ilk 3 kural (Gerilmelere karşı koyma, kod düzenlemelerine karşı koyma ve hızlı geri dönüş) mantıken aynı anda gerçekleşemez. Bu durumun benzeri CAP Teoremiyle aynı mantıktadır.
+
+Örnek : End-to-End Testler
+
+End-to-End Testler tüm sistemin (Kullanıcı arayüzü, veritabanı, diğer araçlar) kullanıcı perspektifinde test edilmesidir. Bu testler birden çok yerden geçtiği için çok fazla kodu testten geçirirler. Bu yüzden de 4 kuraldan hızlı geridönüş kuralını sağlayamazlar çünkü çok fazla koddan geçtiği için hızlı bir geridönüş yapılamaz.
+
+![Unit Test Kuralları](assets/rules.png)
+
+### Test Piramiti
+
+Test piramiti bir konseptir. Bu konsept 3 unit test'in gösterimidir. Bunlar unit testler, entegrasyon testleri ve end-to-end testler.
+
+![Test Piramiti](assets/test-pyramid.png)
+
+Bu piramitin yatay kısmı test sayısını belirtir. Dikeye doğru olan kısmı ise kullanıcı deneyimine yakınlık olarak tanımlanabilir.
+
+İlk katman olan unit test kısmı aslında en çok kod içeren kısımdır. Çünkü küçük bir kod parçasının bile tüm edge case'leri test edilir. Bu durumda kısa kodlar olsada çok fazla case çıkabileceği için test sayısı olarak en fazla kod içeren kısımdır. Ayrıca kullanıcı deneyimine yakın değildir sadece belli bir yerdeki kodun çalışmasını test ederler.
+
+İkinci kısım olan entegrasyon testleri ise biraz daha işin içinde veritabanı veya diğer araçların girdiği kısımdır. Ve kullanıcı kullanımına bir adım yaklaşmış gibi oluyoruz. Örneği bir kullanıcı kayıt oluşturduğunda entegrasyon testleri ile veritabanına kayıt olup olmadığını test ediyoruz. Bu durumda kullanıcı deneyimine yaklaştığımızı gösteriyor. Bu katmanda test sayısı olarak unit testlerinden daha az test içerir.
+
+Son katman olan end-to-end testler. Bu testler kullanıcı deneyimini birebir taklit eder tüm süreci test eder. Kullanıcının arayüzden başlattığı aksiyonun tüm yolculuğunu simüle eder ve bu test yaklaşımı kullanıcı deneyimine yaklaşmanın son noktasıdır. Test sayısı olarak daha az test içerir çünkü büyük bir sistemin farklı parçalarını içerir.
+
+### Mocks ve Test Kırılganlığı
