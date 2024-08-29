@@ -244,4 +244,21 @@ Bu piramitin yatay kısmı test sayısını belirtir. Dikeye doğru olan kısmı
 
 Son katman olan end-to-end testler. Bu testler kullanıcı deneyimini birebir taklit eder tüm süreci test eder. Kullanıcının arayüzden başlattığı aksiyonun tüm yolculuğunu simüle eder ve bu test yaklaşımı kullanıcı deneyimine yaklaşmanın son noktasıdır. Test sayısı olarak daha az test içerir çünkü büyük bir sistemin farklı parçalarını içerir.
 
-### Mocks ve Test Kırılganlığı
+### Mock Veriler
+
+Mock kavramı bir metodun veya verinin taklit edilmesidir. Test yazarken sürekli tüm istekleri gerçekleştirmek yerine oluyormuş gibi
+yazabildiğimiz mock objeleri veya metodları bize kolaylık sağlar.
+
+#### Stub İle Mock Arasındaki Fark
+
+Stub, aynı mock gibi yine test'i oluyormuş gibi yaparak taklit etmemize olanak sağlar.
+
+Mocklar ve stublar aslında bir test double metodudur. Test double, bir nesnenin yerine geçen, davranışlarını taklit eden nesneleri ifade eder. (Dummy veriler, Fake veriler, Stub, Mock, Spy)
+
+Aralarındaki fark ise stub'lar belirli bir girdi karşısında sabit bir yanıt döndürmek için kullanılır. Daha basit ve çıktıyı direkt verir. Mock ise belirli bir metodun nasıl çağrıldığını izlemek, takip etmke için kullanılır ve her zaman geri veri döndürmek zorunda değildir.
+
+Örnek;
+
+- Bir mail sistemi olsun veritabanından veri çekip kullanıcıya mail atan bir sistem. Bu sistemde veritabanından veri çeken kodun testini yazarken, veriyi alırken ki kod, bu fonksiyon stub ile taklit edilebilir. Bu verileri kullanıcıya mail olarak atan kod ise mock kullanılarak test'i gerçkeleştirilebilir.
+
+### Unit Test Stilleri
