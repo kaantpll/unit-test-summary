@@ -261,4 +261,32 @@ Aralarındaki fark ise stub'lar belirli bir girdi karşısında sabit bir yanıt
 
 - Bir mail sistemi olsun veritabanından veri çekip kullanıcıya mail atan bir sistem. Bu sistemde veritabanından veri çeken kodun testini yazarken, veriyi alırken ki kod, bu fonksiyon stub ile taklit edilebilir. Bu verileri kullanıcıya mail olarak atan kod ise mock kullanılarak test'i gerçkeleştirilebilir.
 
-### Unit Test Stilleri
+### Unit Test Anti Paternler
+
+1- Private Metodların Test Edilmesi
+Private yöntemlerin unit test edilmesi yaygın bir sorundur. Private yöntemleri sadece test amacıyla açığa çıkarmak, testlerin uygulama detaylarına bağımlı hale gelmesine yol açar ve refaktörasyon sırasında sorun yaratabilir. Private metodları doğrudan test etmek yerine, bu yöntemleri dolaylı olarak, sınıfın genel davranışı üzerinden test etmelisiniz.
+
+Eğer private metod karmaşık ve yeterli test kapsamı sağlanamıyorsa:
+
+Kod kullanılmıyor olabilir ve bu durumda silinmelidir.
+Kodun karmaşıklığı, eksik bir soyutlamadan kaynaklanıyor olabilir. Bu durumda soyutlama ayrı bir sınıfa çıkarılmalıdır.
+---
+2- Private State'i Expose Etmek
+Sınıf içinde private olarak tanımlanan state (durum) test sırasında açığa çıkarılmamalıdır. Private state'i sadece test amacıyla public yapmak, testlerin uygulama detaylarına bağımlı hale gelmesine ve anti-pattern'e neden olur. Bunun yerine, bu state'in dış dünyada nasıl bir davranış sergilediği üzerinden testler yazılmalıdır. Örneğin, bir müşteri terfi ettirildikten sonra indirim alması gibi bir durumu test etmelisiniz.
+---
+3- Domain Bilgisini Sızdırmak
+Unit testlerin, domain bilgilerini ya da içsel işleyişi gereğinden fazla açığa çıkarması anti-pattern oluşturur. Testler, sadece dışarıdan gözlemlenebilir davranışları doğrulamalıdır, içsel detaylara bağlı kalmak domain bilgisinin sızmasına yol açar ve bu da ileride yapılacak değişikliklerde testlerin kırılmasına sebep olabilir.
+----
+4- Kod Kirliliği
+Testler sırasında kodun gereksiz detaylar veya fazlalıklarla dolu olması kodun okunabilirliğini ve sürdürülebilirliğini zorlaştırır. Bu tarz kirlilikler, testlerin bakımını zorlaştırabilir ve ileride eklenmesi gereken testlerde kafa karışıklığı yaratabilir. Kodun temiz tutulması, sadece gerekli testlerin yazılması önemlidir.
+-----
+5- Somut (Concrete) Sınıfların Mocklanması
+Normalde mocklanması gereken yapılar interfaceler olmalıdır. Ancak bazı durumlarda somut (concrete) sınıfların mocklanması gerekebilir. Bu kullanışlı olsa da, Single Responsibility prensibine ters düşer. Mocklama yaparken, sınıfın bağımlılıklarını değil, dışarıya sunduğu genel davranışları hedef almalı ve o şekilde test etmelisiniz.
+
+
+
+
+
+
+
+
